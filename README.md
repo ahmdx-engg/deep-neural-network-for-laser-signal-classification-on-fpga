@@ -4,7 +4,7 @@ Access the files uploaded via the link https://drive.google.com/drive/folders/1j
 
 This repository presents our research on deploying binarized deep neural networks (BNNs) for laser fringe pattern detection which is a core problem in optical sensing and interferometry. Instead of relying on bulky GPUs or offline image processing, our project explores how deep learning models can run efficiently on FPGA-like platforms for real-time, low-power fringe classification.
 
-##Project Motivation
+## Project Motivation
 
 Laser fringe analysis is central to many optical and metrology systems from structural monitoring to vibration sensing. Traditionally, these systems depend on Fourier or wavelet-based algorithms, which are powerful but computationally expensive and hard to scale to real-time embedded applications.
 
@@ -15,7 +15,7 @@ The question we asked was simple:
 
 This led us to experiment with binarization techniques, where neural networks use only +1 and –1 weights and activations, drastically reducing memory and computation.
 
-##Research Objective
+## Research Objective
 
 Our goal was to design a compact deep learning model that:
 
@@ -31,31 +31,31 @@ Once the technique proved functional, we scaled it to object detection models (Y
 
 Our research evolved in three phases:
 
-##1. AlexNet — Proof of Concept
+## 1. AlexNet — Proof of Concept
 
 We implemented XNOR-style binary convolutions in AlexNet and verified that classification could still be achieved with reduced precision.
 Results confirmed significant savings in computation with acceptable accuracy trade-offs.
 
-##2. YOLOv1 — Early Object Detection
+## 2. YOLOv1 — Early Object Detection
 
 We extended binarization to YOLOv1, which performed dense detection using grid-based classification.
 However, due to its shallow architecture and reliance on high-resolution feature maps, binarization degraded spatial precision, showing the first limitations of pure BNNs.
 
-##3. YOLOv5 — Advanced Testing
+## 3. YOLOv5 — Advanced Testing
 
 Finally, we attempted binarization on YOLOv5n, the lightweight variant of the YOLO family.
 This was the most challenging phase: YOLOv5’s C3 (CSP bottleneck) structure depends on skip connections and partial gradient flow mechanisms that don’t play well with binary activations.
 The binarized model struggled to converge, exposing the trade-offs between hardware efficiency and learning stability.
 Despite these limitations, the project demonstrated how binarization can drastically simplify neural networks for deployment, especially when adapted carefully to hardware constraints.
 
-##System Design Overview
+## System Design Overview
 
 Our design pipeline included:
 
 # Stage                                                            	Description
 Dataset & Preprocessing	                                            Synthetic laser fringe images generated in MATLAB and normalized to 320×320 grayscale.
-Model Adaptation	                                                  YOLOv5 modified for binary (+1/−1) weights and activations using XNOR-Net principles.
-Quantization & Static Memory Design                               	Removed dynamic memory allocation and restructured dataflow for HLS/FPGA compatibility.
+Model Adaptation	                                                   YOLOv5 modified for binary (+1/−1) weights and activations using XNOR-Net principles.
+Quantization & Static Memory Design                               	 Removed dynamic memory allocation and restructured dataflow for HLS/FPGA compatibility.
 Simulation & Verification	                                          Outputs validated against MATLAB-generated reference data and PyTorch baselines.
 Key Insights
 
