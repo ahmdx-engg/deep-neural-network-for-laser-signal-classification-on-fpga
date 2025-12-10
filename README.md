@@ -79,11 +79,4 @@ Concluding Remarks
 This project bridges deep learning and embedded hardware design, showing that efficient neural inference is possible without relying on large compute platforms.
 Although full FPGA deployment was not completed, the groundwork from algorithm selection and model binarization to hardware synthesis design lays the foundation for future real-time implementations.
 
-In short:
 
-We experimented, optimized, and learned how far binarization can push deep learning efficiency and how YOLOv5 might one day run fully on edge hardware for optical sensing.
-
-
-Integrate with live laser sensing systems for real fringe analysis.
-
-Explore multimodal extensions (e.g., vibration sensing, interferometric displacement).
